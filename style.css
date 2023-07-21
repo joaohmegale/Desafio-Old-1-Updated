@@ -1,0 +1,26 @@
+.profile-pick{
+    object-fit: contain;
+    width: 30px;
+    height: 30px !important;
+    border-radius: 50%;
+    display: inline-block !important;
+    margin-right: 10px;
+}
+
+.doca-form-control{
+    width: 400px !important;
+}
+
+.doca-form__field {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+.big-text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#button{
+    margin-right: 10px;
+}
