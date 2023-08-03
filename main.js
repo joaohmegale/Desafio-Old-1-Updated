@@ -109,14 +109,18 @@ const data = {
 
 let input = document.getElementById("search");
 let select = document.getElementById("select");
-let table = document.querySelector(`.table`);
+let table = document.querySelectorAll('.table');
 let button = document.querySelector('#button');
+let button1 = document.querySelector('#button1');
 
-renderTable(data.guides);
+table.forEach((tableRef)=>{
+    renderTable(tableRef, data.guides);
+});
+
 renderSelectOptions(data.insurances);
 
 
-function renderTable(data) {
+function renderTable(tableRef, data) {
     
     let visual = '';
 
@@ -139,7 +143,7 @@ function renderTable(data) {
         `
     });
 
-    table.innerHTML = visual;
+    tableRef.innerHTML = visual;
 
 }
 
@@ -161,20 +165,35 @@ const searchBox = () => {
 
         return equals;
     });
-
-    renderTable(filtered);
+    console.log(filtered);
+    table.forEach((tableRef) => {
+        renderTable(tableRef, filtered);
+    });
 }
 
 function renderSelectOptions(data) {
     const select = document.getElementById("select");
+    select.innerHTML = `<option value="">Todas as opções.</option>`
+
     data.forEach(insurance=>{
         select.innerHTML += `<option value="${insurance.id}">${insurance.name}</option>`
     });
     
 }
 
-button.addEventListener("click",function() {
-    renderTable(data.guides); 
-    select.innerHTML = `<option value="0">Todas as opções.</option>`
-    renderSelectOptions(data.insurances)
-})
+button.addEventListener("click",function() { 
+    select.value = ""
+    table.forEach((table,i) => {
+        if (i===0) {
+            renderTable(table, data.guides);
+        }
+    })
+});
+button1.addEventListener("click",function() { 
+    select.value = ""
+    table.forEach((table,i) => {
+        if (i!==0) {
+            renderTable(table, data.guides);
+        }
+    })
+});
